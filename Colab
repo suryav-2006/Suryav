@@ -1,0 +1,17 @@
+import pandas as pd
+
+# Load the Excel file
+df = pd.read_excel('DataSet.xlsx')
+
+# 1. Total revenue by country
+country_revenue = df.groupby('Country')['Revenue (USD)'].sum().sort_values(ascending=False)
+
+# 2. Top 3 sales reps by total revenue
+df['Sales Rep Name'] = df['First Name'] + ' ' + df['Last Name']
+rep_revenue = df.groupby('Sales Rep Name')['Revenue (USD)'].sum().sort_values(ascending=False).head(3)
+
+# Print results
+print("Total Revenue by Country:")
+print(country_revenue)
+print("\nTop 3 Sales Reps by Total Revenue:")
+print(rep_revenue)
